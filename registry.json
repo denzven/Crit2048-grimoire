@@ -1,0 +1,21 @@
+{
+  "version": "1.0",
+  "updated": "2026-05-01",
+  "featured": [],
+  "packs": [
+    {
+      "id": "default",
+      "name": "Crit 2048 — Default",
+      "author": "denzven",
+      "version": "1.0.0",
+      "type": "mega",
+      "description": "The built-in game content. All enemies, classes, weapons, and hazards from the base game, exported as a reference pack.",
+      "icon": "🐉",
+      "tags": ["official", "reference"],
+      "hasAdvancedScripts": false,
+      "packUrl": "https://raw.githubusercontent.com/denzven/crit2048-grimoire/main/packs/default/pack.json",
+      "bannerUrl": null,
+      "previewUrl": null
+    }
+  ]
+}

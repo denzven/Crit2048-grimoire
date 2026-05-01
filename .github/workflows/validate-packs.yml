@@ -1,0 +1,46 @@
+name: Validate Packs
+
+on:
+  pull_request:
+    paths:
+      - 'packs/**'
+      - 'registry.json'
+
+jobs:
+  validate:
+    name: Validate Pack JSON
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Validate all pack.json files
+        run: |
+          failed=0
+          for pack_file in packs/*/pack.json; do
+            echo "--- Validating: $pack_file ---"
+            node tools/validate.js "$pack_file" || failed=1
+          done
+          if [ $failed -ne 0 ]; then
+            echo "❌ One or more packs failed validation."
+            exit 1
+          fi
+          echo "✅ All packs validated successfully."
+
+      - name: Validate registry.json
+        run: |
+          node -e "
+            const reg = require('./registry.json');
+            if (!reg.version) { console.error('registry.json missing version'); process.exit(1); }
+            if (!Array.isArray(reg.packs)) { console.error('registry.json missing packs array'); process.exit(1); }
+            reg.packs.forEach((p, i) => {
+              ['id','name','author','version','type','packUrl'].forEach(f => {
+                if (!p[f]) { console.error('registry.json pack[' + i + '] missing: ' + f); process.exit(1); }
+              });
+            });
+            console.log('✅ registry.json is valid (' + reg.packs.length + ' packs)');
+          "
