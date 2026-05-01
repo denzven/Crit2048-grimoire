@@ -1,0 +1,42 @@
+{
+  "id": "your-pack-id",
+  "name": "Your Pack Name",
+  "version": "1.0.0",
+  "author": "your-github-username",
+  "description": "A short description of your pack (max 200 characters).",
+  "type": "dungeon",
+  "game_version": ">=1.0.0",
+  "icon": "⚔️",
+  "banner": "banner.png",
+  "tags": ["difficulty:normal"],
+
+  "enemies": [
+    {
+      "id": "example_enemy",
+      "name": "Example Enemy",
+      "icon": "👹",
+      "hp": 1000,
+      "slides": 30,
+      "lore": "An example enemy created from the template.",
+      "mode": "simple",
+      "primaryAbility": {
+        "name": "Example Strike",
+        "trigger": "every_n_slides",
+        "triggerParam": 10,
+        "effect": "spawn_hazard",
+        "effectParam": "slime",
+        "logMessage": "Example Strike: A slime appeared!"
+      },
+      "deathReward": {
+        "goldBonus": 20,
+        "logMessage": "Example enemy defeated! +20 gold."
+      }
+    }
+  ],
+
+  "classes": [],
+  "weapons": [],
+  "hazards": [],
+  "artifacts": [],
+  "skin": null
+}
